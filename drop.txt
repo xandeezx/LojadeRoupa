@@ -1,0 +1,21 @@
+USE LojaRoupas;
+
+DROP VIEW IF EXISTS vw_clientes_compras;
+DROP VIEW IF EXISTS vw_vendas_detalhes;
+DROP VIEW IF EXISTS vw_produtos_categoria;
+DROP VIEW IF EXISTS vw_funcionarios_vendas;
+DROP VIEW IF EXISTS vw_promocoes_ativas;
+DROP VIEW IF EXISTS vw_estoque_produtos;
+DROP VIEW IF EXISTS vw_clientes_por_cidade;
+DROP VIEW IF EXISTS vw_top_clientes;
+DROP VIEW IF EXISTS vw_faturamento_mensal;
+DROP VIEW IF EXISTS vw_produtos_mais_vendidos;
+
+DROP TABLE IF EXISTS ItensVenda;
+DROP TABLE IF EXISTS Venda;
+DROP TABLE IF EXISTS Promocao;
+DROP TABLE IF EXISTS Produto;
+DROP TABLE IF EXISTS Categoria;
+DROP TABLE IF EXISTS Cliente;
+DROP TABLE IF EXISTS Funcionario;
+DROP TABLE IF EXISTS Loja;

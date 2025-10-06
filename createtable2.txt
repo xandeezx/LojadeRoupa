@@ -1,0 +1,82 @@
+CREATE DATABASE LojaRoupas;
+USE LojaRoupas;
+
+CREATE TABLE Loja (
+    id_loja INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200),
+    telefone VARCHAR(20),
+    email VARCHAR(100)
+);
+
+CREATE TABLE Categoria (
+    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    descricao VARCHAR(200)
+);
+
+CREATE TABLE Produto (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(200),
+    preco DECIMAL(10,2) NOT NULL,
+    tamanho VARCHAR(10),
+    cor VARCHAR(30),
+    marca VARCHAR(50),
+    quantidade_estoque INT,
+    data_entrada DATE,
+    data_saida DATE,
+    id_categoria INT,
+    id_loja INT,
+    FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria),
+    FOREIGN KEY (id_loja) REFERENCES Loja(id_loja)
+);
+
+CREATE TABLE Cliente (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) UNIQUE,
+    endereco VARCHAR(200),
+    telefone VARCHAR(20),
+    email VARCHAR(100)
+);
+
+CREATE TABLE Funcionario (
+    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cargo VARCHAR(50),
+    contato VARCHAR(100)
+);
+
+CREATE TABLE Venda (
+    id_venda INT AUTO_INCREMENT PRIMARY KEY,
+    data_venda DATE NOT NULL,
+    forma_pagamento VARCHAR(50),
+    status VARCHAR(20),
+    id_cliente INT,
+    id_funcionario INT,
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
+    FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario)
+);
+
+CREATE TABLE ItensVenda (
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    id_venda INT,
+    id_produto INT,
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10,2) NOT NULL,
+    desconto DECIMAL(5,2),
+    FOREIGN KEY (id_venda) REFERENCES Venda(id_venda),
+    FOREIGN KEY (id_produto) REFERENCES Produto(id_produto)
+);
+
+CREATE TABLE Promocao (
+    id_promocao INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    descricao VARCHAR(200),
+    percentual_desconto DECIMAL(5,2),
+    data_inicio DATE,
+    data_fim DATE,
+    id_produto INT,
+    FOREIGN KEY (id_produto) REFERENCES Produto(id_produto)
+);

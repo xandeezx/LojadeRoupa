@@ -1,0 +1,63 @@
+USE LojaRoupas;
+
+-- ===========================
+-- UPDATEs em Loja
+-- ===========================
+UPDATE Loja SET telefone = '(11) 4000-1234' WHERE id_loja = 1;
+UPDATE Loja SET nome = 'Loja Centro Renovada' WHERE id_loja = 1;
+UPDATE Loja SET email = 'loja.sul@roupas.com' WHERE id_loja = 5;
+
+-- ===========================
+-- UPDATEs em Categoria
+-- ===========================
+UPDATE Categoria SET descricao = 'Moda masculina variada' WHERE id_categoria = 1;
+UPDATE Categoria SET nome = 'Roupas de Luxo' WHERE id_categoria = 14;
+
+-- ===========================
+-- UPDATEs em Produto
+-- ===========================
+UPDATE Produto SET preco = preco * 1.05 WHERE id_produto = 1; 
+UPDATE Produto SET cor = 'Preto Fosco' WHERE id_produto = 10;
+UPDATE Produto SET quantidade_estoque = quantidade_estoque - 10 WHERE id_produto = 2;
+UPDATE Produto SET descricao = 'Jaqueta jeans clássica' WHERE id_produto = 17;
+
+-- ===========================
+-- UPDATEs em Cliente
+-- ===========================
+UPDATE Cliente SET endereco = 'Av. Paulista, 1000' WHERE id_cliente = 1;
+UPDATE Cliente SET email = 'novo.email.maria@example.com' WHERE id_cliente = 2;
+UPDATE Cliente SET telefone = '(81) 99999-1111' WHERE id_cliente = 3;
+
+-- ===========================
+-- UPDATEs em Funcionario
+-- ===========================
+UPDATE Funcionario SET salario = salario + 300 WHERE id_funcionario = 1;
+UPDATE Funcionario SET cargo = 'Supervisor' WHERE id_funcionario = 7;
+UPDATE Funcionario SET telefone = '(81) 4002-8922' WHERE id_funcionario = 10;
+
+-- 🚩 substituí o DELETE problemático por este UPDATE seguro:
+UPDATE Funcionario SET cargo = 'Inativo', salario = 0 WHERE id_funcionario = 20;
+
+-- ===========================
+-- UPDATEs em Venda
+-- ===========================
+UPDATE Venda SET forma_pagamento = 'Pix' WHERE id_venda = 5;
+UPDATE Venda SET status = 'Cancelada' WHERE id_venda = 8;
+
+-- ===========================
+-- UPDATEs em ItensVenda
+-- ===========================
+UPDATE ItensVenda SET desconto = 15.00 WHERE id_item = 2;
+UPDATE ItensVenda SET quantidade = quantidade + 1 WHERE id_item = 3;
+
+-- ===========================
+-- UPDATEs em Promocao
+-- ===========================
+UPDATE Promocao SET percentual_desconto = 25.00 WHERE id_promocao = 1;
+
+-- ===========================
+-- DELETEs (seguros)
+-- ===========================
+DELETE FROM Cliente WHERE id_cliente = 30;
+DELETE FROM Produto WHERE id_produto = 40;
+DELETE FROM Promocao WHERE id_promocao = 5;

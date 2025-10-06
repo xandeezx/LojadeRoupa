@@ -1,0 +1,206 @@
+USE LojaRoupas;
+
+-- ================================
+-- INSERTS NA TABELA Loja (5 registros)
+-- ================================
+INSERT INTO Loja (nome, endereco, telefone, email) VALUES
+('Loja Central', 'Rua das Flores, 123 - Centro', '(11) 1111-1111', 'central@lojaroupas.com'),
+('Loja Shopping', 'Av. Brasil, 456 - Shopping Cidade', '(11) 2222-2222', 'shopping@lojaroupas.com'),
+('Loja Praia', 'Av. Atlântica, 789 - Praia', '(11) 3333-3333', 'praia@lojaroupas.com'),
+('Loja Norte', 'Rua Amazonas, 321 - Zona Norte', '(11) 4444-4444', 'norte@lojaroupas.com'),
+('Loja Sul', 'Rua Paraná, 654 - Zona Sul', '(11) 5555-5555', 'sul@lojaroupas.com');
+
+-- ================================
+-- INSERTS NA TABELA Categoria (20 registros)
+-- ================================
+INSERT INTO Categoria (nome, descricao) VALUES
+('Roupas Masculinas', 'Camisetas, calças e bermudas masculinas'),
+('Roupas Femininas', 'Vestidos, saias, blusas e calças femininas'),
+('Roupas Infantis', 'Roupas para crianças de 0 a 12 anos'),
+('Acessórios', 'Bolsas, cintos, carteiras, óculos e bonés'),
+('Calçados', 'Tênis, sapatos, sandálias e chinelos'),
+('Moda Praia', 'Biquínis, sungas e saídas de praia'),
+('Esportivos', 'Roupas e acessórios para prática esportiva'),
+('Inverno', 'Casacos, moletons e peças para frio'),
+('Social', 'Camisas sociais, ternos e sapatos sociais'),
+('Casual', 'Peças para o dia a dia'),
+('Fitness', 'Leggings, tops e roupas de treino'),
+('Íntima', 'Lingerie, cuecas e pijamas'),
+('Jeans', 'Calças, jaquetas e shorts jeans'),
+('Luxo', 'Peças de grife e coleções premium'),
+('Outlet', 'Peças em liquidação'),
+('Vintage', 'Peças retrô e estilo antigo'),
+('Formal', 'Vestidos de festa e ternos de cerimônia'),
+('Sustentável', 'Roupas confeccionadas com materiais ecológicos'),
+('Básicos', 'Peças neutras e essenciais'),
+('Infantil Premium', 'Linha premium para crianças');
+
+-- ================================
+-- INSERTS NA TABELA Produto (40 registros)
+-- ================================
+-- (colunas: nome, descricao, preco, tamanho, cor, marca, quantidade_estoque, data_entrada, data_saida, id_categoria, id_loja)
+INSERT INTO Produto (nome, descricao, preco, tamanho, cor, marca, quantidade_estoque, data_entrada, data_saida, id_categoria, id_loja) VALUES
+('Camiseta Básica', 'Camiseta de algodão em malha simples', 39.90, 'M', 'Branca', 'Hering', 120, '2025-01-10', NULL, 1, 1),
+('Calça Jeans Slim', 'Calça jeans slim fit', 129.90, '42', 'Azul', 'Levis', 80, '2025-01-12', NULL, 13, 1),
+('Vestido Floral', 'Vestido casual estampado', 149.90, 'P', 'Rosa', 'Zara', 50, '2025-01-15', NULL, 2, 2),
+('Tênis Running', 'Tênis esportivo de alta amortecimento', 199.90, '41', 'Preto', 'Nike', 70, '2025-01-18', NULL, 5, 2),
+('Bermuda Jeans', 'Bermuda masculina jeans', 89.90, '40', 'Azul Claro', 'Colcci', 60, '2025-01-20', NULL, 1, 3),
+('Blusa Feminina', 'Blusa manga longa leve', 79.90, 'M', 'Vermelha', 'Renner', 90, '2025-01-21', NULL, 2, 3),
+('Sunga Praia', 'Sunga estampada para verão', 59.90, 'G', 'Azul', 'Speedo', 40, '2025-01-22', NULL, 6, 3),
+('Biquíni Estampado', 'Biquíni duas peças com bojo', 99.90, 'M', 'Amarelo', 'C&A', 45, '2025-01-23', NULL, 6, 2),
+('Moletom Unissex', 'Moletom com capuz confortável', 159.90, 'G', 'Cinza', 'Adidas', 55, '2025-01-25', NULL, 8, 1),
+('Jaqueta de Couro', 'Jaqueta de couro sintético', 249.90, 'M', 'Preto', 'Riachuelo', 20, '2025-01-26', NULL, 8, 1),
+('Boné Aba Reta', 'Boné estilo streetwear', 59.90, 'U', 'Preto', 'New Era', 200, '2025-01-27', NULL, 4, 2),
+('Carteira Couro', 'Carteira masculina de couro', 79.90, 'U', 'Marrom', 'Tommy', 60, '2025-01-28', NULL, 4, 2),
+('Shorts Fitness', 'Shorts de treino respirável', 69.90, 'P', 'Preto', 'Track&Field', 95, '2025-01-29', NULL, 11, 2),
+('Top Esportivo', 'Top com suporte médio', 59.90, 'M', 'Rosa', 'Nike', 80, '2025-01-30', NULL, 11, 3),
+('Sapato Social', 'Sapato de couro masculino', 199.90, '42', 'Preto', 'Ferracini', 30, '2025-02-01', NULL, 9, 3),
+('Blazer Masculino', 'Blazer social slim', 299.90, '50', 'Azul Marinho', 'Aramis', 15, '2025-02-02', NULL, 17, 2),
+('Jaqueta Jeans', 'Jaqueta jeans oversized', 179.90, 'G', 'Azul', 'Levis', 40, '2025-02-03', NULL, 13, 1),
+('Vestido Festa', 'Vestido longo de festa', 399.90, 'M', 'Vermelho', 'Maria Filo', 10, '2025-02-05', NULL, 17, 2),
+('Camisa Polo', 'Camisa polo básica', 99.90, 'M', 'Verde', 'Lacoste', 50, '2025-02-06', NULL, 10, 3),
+('Pijama Infantil', 'Pijama de algodão para crianças', 59.90, '6 anos', 'Azul', 'Lilica', 40, '2025-02-07', NULL, 3, 1),
+('Legging Fitness', 'Legging compressiva', 89.90, 'M', 'Preto', 'Lupo', 70, '2025-02-08', NULL, 11, 2),
+('Chinelo Praia', 'Chinelo emborrachado', 29.90, '39', 'Azul', 'Havaianas', 150, '2025-02-09', NULL, 6, 3),
+('Bolsa Tiracolo', 'Bolsa pequena de uso diário', 119.90, 'U', 'Preta', 'Santa Lolla', 35, '2025-02-10', NULL, 4, 1),
+('Meia Esportiva', 'Meia cano médio para esporte', 19.90, 'U', 'Branca', 'Adidas', 200, '2025-02-11', NULL, 7, 2),
+('Casaco Lã', 'Casaco de lã sintética', 249.90, 'G', 'Cinza', 'Hering', 25, '2025-02-12', NULL, 8, 1),
+('Saia Midi', 'Saia midi estampada', 89.90, 'M', 'Floral', 'Zara', 30, '2025-02-13', NULL, 2, 3),
+('Macacão Jeans', 'Macacão estilo utilitário', 179.90, 'M', 'Azul', 'Levis', 20, '2025-02-14', NULL, 13, 2),
+('Blusa Gola Alta', 'Blusa gola alta para frio', 99.90, 'P', 'Preta', 'Renner', 45, '2025-02-15', NULL, 8, 1),
+('Camisa Social Feminina', 'Camisa social slim', 129.90, 'M', 'Branca', 'Hering', 35, '2025-02-16', NULL, 9, 3),
+('Cueca Boxer', 'Cueca boxer algodao', 29.90, 'M', 'Preto', 'Lupo', 120, '2025-02-17', NULL, 12, 1),
+('Tênis Casual', 'Tênis para uso diário', 149.90, '41', 'Branco', 'Puma', 60, '2025-02-18', NULL, 5, 2),
+('Vestido Verão', 'Vestido leve para verão', 119.90, 'M', 'Amarelo', 'C&A', 55, '2025-02-19', NULL, 2, 1),
+('Jaqueta Sintética', 'Jaqueta leve impermeável', 159.90, 'M', 'Preto', 'Colcci', 40, '2025-02-20', NULL, 8, 4),
+('Polo Infantil', 'Camiseta polo infantil', 69.90, '8 anos', 'Azul', 'Klin', 30, '2025-02-21', NULL, 20, 5),
+('Roupa Yoga', 'Conjunto leve para yoga', 99.90, 'M', 'Roxo', 'Lupo', 45, '2025-02-22', NULL, 11, 4),
+('Bolsa de Praia', 'Bolsa grande para praia', 89.90, 'U', 'Estampada', 'C&A', 25, '2025-02-23', NULL, 4, 3),
+('Calça Moletom', 'Calça confortável', 119.90, 'M', 'Cinza', 'Adidas', 60, '2025-02-24', NULL, 8, 5),
+('Óculos de Sol', 'Óculos UV400', 129.90, 'U', 'Preto', 'RayBan', 35, '2025-02-25', NULL, 4, 2),
+('Camisa Estampada', 'Camisa de verão estampada', 89.90, 'M', 'Colorida', 'Hering', 70, '2025-02-26', NULL, 10, 1),
+('Sapatênis', 'Sapatênis confortável', 179.90, '41', 'Marrom', 'Ferracini', 40, '2025-02-27', NULL, 5, 4);
+
+-- ================================
+-- INSERTS NA TABELA Cliente (30 registros)
+-- ================================
+-- (colunas: nome, cpf, endereco, telefone, email) -> e-mails únicos
+INSERT INTO Cliente (nome, cpf, endereco, telefone, email) VALUES
+('João Silva', '111.111.111-11', 'Rua A, 123', '(81) 9999-1111', 'joao.silva@example.com'),
+('Maria Oliveira', '222.222.222-22', 'Rua B, 456', '(81) 9999-2222', 'maria.oliveira@example.com'),
+('Carlos Santos', '333.333.333-33', 'Rua C, 789', '(81) 9999-3333', 'carlos.santos@example.com'),
+('Ana Souza', '444.444.444-44', 'Rua D, 321', '(81) 9999-4444', 'ana.souza@example.com'),
+('Pedro Lima', '555.555.555-55', 'Rua E, 654', '(81) 9999-5555', 'pedro.lima@example.com'),
+('Juliana Costa', '666.666.666-66', 'Rua F, 987', '(81) 9999-6666', 'juliana.costa@example.com'),
+('Lucas Pereira', '777.777.777-77', 'Rua G, 741', '(81) 9999-7777', 'lucas.pereira@example.com'),
+('Fernanda Alves', '888.888.888-88', 'Rua H, 852', '(81) 9999-8888', 'fernanda.alves@example.com'),
+('Rafael Gomes', '999.999.999-99', 'Rua I, 963', '(81) 9999-9999', 'rafael.gomes@example.com'),
+('Camila Rocha', '101.101.101-10', 'Rua J, 159', '(81) 9888-1010', 'camila.rocha@example.com'),
+('Bruno Martins', '202.202.202-20', 'Rua K, 753', '(81) 9888-2020', 'bruno.martins@example.com'),
+('Aline Ferreira', '303.303.303-30', 'Rua L, 357', '(81) 9888-3030', 'aline.ferreira@example.com'),
+('Thiago Melo', '404.404.404-40', 'Rua M, 159', '(81) 9888-4040', 'thiago.melo@example.com'),
+('Patrícia Dias', '505.505.505-50', 'Rua N, 951', '(81) 9888-5050', 'patricia.dias@example.com'),
+('Gabriel Ribeiro', '606.606.606-60', 'Rua O, 753', '(81) 9888-6060', 'gabriel.ribeiro@example.com'),
+('Larissa Nunes', '707.707.707-70', 'Rua P, 357', '(81) 9888-7070', 'larissa.nunes@example.com'),
+('Felipe Souza', '808.808.808-80', 'Rua Q, 159', '(81) 9888-8080', 'felipe.souza@example.com'),
+('Isabela Mendes', '909.909.909-90', 'Rua R, 951', '(81) 9888-9090', 'isabela.mendes@example.com'),
+('Ricardo Silva', '111.222.333-44', 'Rua S, 753', '(81) 9888-1122', 'ricardo.silva@example.com'),
+('Beatriz Santos', '222.333.444-55', 'Rua T, 357', '(81) 9888-2233', 'beatriz.santos@example.com'),
+('Mariana Rocha', '333.444.555-66', 'Rua U, 258', '(81) 9888-3344', 'mariana.rocha@example.com'),
+('Eduardo Lima', '444.555.666-77', 'Rua V, 147', '(81) 9888-4455', 'eduardo.lima@example.com'),
+('Vanessa Souza', '555.666.777-88', 'Rua W, 369', '(81) 9888-5566', 'vanessa.souza@example.com'),
+('Marcelo Dias', '666.777.888-99', 'Rua X, 951', '(81) 9888-6677', 'marcelo.dias@example.com'),
+('Sabrina Costa', '777.888.999-00', 'Rua Y, 753', '(81) 9888-7788', 'sabrina.costa@example.com'),
+('André Gomes', '888.999.111-22', 'Rua Z, 159', '(81) 9888-8899', 'andre.gomes@example.com'),
+('Natália Nunes', '999.111.222-33', 'Rua AA, 357', '(81) 9888-9900', 'natalia.nunes@example.com'),
+('Daniel Souza', '111.333.555-77', 'Rua BB, 258', '(81) 9877-1111', 'daniel.souza@example.com'),
+('Gabriela Rocha', '222.444.666-88', 'Rua CC, 147', '(81) 9877-2222', 'gabriela.rocha@example.com');
+
+-- ================================
+-- INSERTS NA TABELA Funcionario (20 registros)
+-- ================================
+-- (colunas: nome, cargo, telefone, salario)
+INSERT INTO Funcionario (nome, cargo, telefone, salario) VALUES
+('Marcos Oliveira', 'Caixa', '(81) 3000-1111', 2200.00),
+('Tatiane Lima', 'Vendedora', '(81) 3000-2222', 1800.00),
+('Diego Alves', 'Vendedor', '(81) 3000-3333', 1700.00),
+('Paula Santos', 'Gerente', '(81) 3000-4444', 4500.00),
+('Rodrigo Rocha', 'Estoquista', '(81) 3000-5555', 2000.00),
+('Camila Ferreira', 'Caixa', '(81) 3000-6666', 2200.00),
+('Eduardo Ribeiro', 'Vendedor', '(81) 3000-7777', 1700.00),
+('Sabrina Costa', 'Vendedora', '(81) 3000-8888', 1800.00),
+('Leonardo Martins', 'Gerente', '(81) 3000-9999', 4600.00),
+('Priscila Mendes', 'Vendedora', '(81) 3001-1111', 1750.00),
+('André Gomes', 'Estoquista', '(81) 3001-2222', 1950.00),
+('Natália Nunes', 'Caixa', '(81) 3001-3333', 2100.00),
+('Marcelo Dias', 'Vendedor', '(81) 3001-4444', 1700.00),
+('Vanessa Alves', 'Vendedora', '(81) 3001-5555', 1800.00),
+('José Carlos', 'Gerente', '(81) 3001-6666', 4800.00),
+('Roberta Silva', 'Estoquista', '(81) 3001-7777', 1950.00),
+('Daniel Souza', 'Vendedor', '(81) 3001-8888', 1700.00),
+('Gabriela Rocha', 'Vendedora', '(81) 3001-9999', 1800.00),
+('Alexandre Melo', 'Caixa', '(81) 3002-1111', 2100.00),
+('Patrícia Ribeiro', 'Vendedora', '(81) 3002-2222', 1750.00);
+
+-- ================================
+-- INSERTS NA TABELA Venda (20 registros)
+-- ================================
+-- (colunas: data_venda, forma_pagamento, status, id_cliente, id_funcionario)
+INSERT INTO Venda (data_venda, forma_pagamento, status, id_cliente, id_funcionario) VALUES
+('2025-03-01', 'Cartão de Crédito', 'Finalizada', 1, 1),
+('2025-03-02', 'Dinheiro', 'Finalizada', 2, 2),
+('2025-03-03', 'Pix', 'Finalizada', 3, 3),
+('2025-03-04', 'Cartão Débito', 'Pendente', 4, 4),
+('2025-03-05', 'Cartão de Crédito', 'Finalizada', 5, 5),
+('2025-03-06', 'Pix', 'Finalizada', 6, 6),
+('2025-03-07', 'Dinheiro', 'Finalizada', 7, 7),
+('2025-03-08', 'Cartão Crédito', 'Cancelada', 8, 8),
+('2025-03-09', 'Pix', 'Finalizada', 9, 9),
+('2025-03-10', 'Cartão Débito', 'Finalizada', 10, 10),
+('2025-03-11', 'Dinheiro', 'Pendente', 11, 11),
+('2025-03-12', 'Pix', 'Finalizada', 12, 12),
+('2025-03-13', 'Cartão Crédito', 'Finalizada', 13, 13),
+('2025-03-14', 'Cartão Débito', 'Finalizada', 14, 14),
+('2025-03-15', 'Dinheiro', 'Finalizada', 15, 15),
+('2025-03-16', 'Pix', 'Finalizada', 16, 16),
+('2025-03-17', 'Cartão Crédito', 'Finalizada', 17, 17),
+('2025-03-18', 'Dinheiro', 'Cancelada', 18, 18),
+('2025-03-19', 'Pix', 'Finalizada', 19, 19),
+('2025-03-20', 'Cartão Débito', 'Finalizada', 20, 20);
+
+-- ================================
+-- INSERTS NA TABELA ItensVenda (20 registros)
+-- ================================
+-- (colunas: id_venda, id_produto, quantidade, preco_unitario, desconto)
+INSERT INTO ItensVenda (id_venda, id_produto, quantidade, preco_unitario, desconto) VALUES
+(1, 1, 2, 39.90, 0.00),
+(1, 2, 1, 129.90, 10.00),
+(2, 3, 1, 149.90, 0.00),
+(3, 4, 1, 199.90, 0.00),
+(4, 5, 2, 89.90, 5.00),
+(5, 6, 1, 79.90, 0.00),
+(6, 7, 1, 59.90, 0.00),
+(7, 8, 1, 99.90, 10.00),
+(8, 9, 1, 159.90, 0.00),
+(9, 10, 1, 249.90, 20.00),
+(10, 11, 1, 59.90, 0.00),
+(11, 12, 1, 79.90, 0.00),
+(12, 13, 2, 69.90, 5.00),
+(13, 14, 1, 59.90, 0.00),
+(14, 15, 1, 199.90, 0.00),
+(15, 16, 1, 299.90, 0.00),
+(16, 17, 1, 179.90, 0.00),
+(17, 18, 1, 399.90, 30.00),
+(18, 19, 1, 99.90, 0.00),
+(19, 20, 1, 59.90, 0.00);
+
+-- ================================
+-- INSERTS NA TABELA Promocao (5 registros)
+-- ================================
+-- (colunas: nome, descricao, percentual_desconto, data_inicio, data_fim, id_produto)
+INSERT INTO Promocao (nome, descricao, percentual_desconto, data_inicio, data_fim, id_produto) VALUES
+('Promoção Verão', 'Descontos em moda praia', 15.00, '2025-01-01', '2025-02-28', 7),
+('Liquidação Jeans', 'Ofertas especiais em jeans', 20.00, '2025-02-15', '2025-03-15', 2),
+('Semana do Cliente', 'Promoção exclusiva para clientes fiéis', 5.00, '2025-03-01', '2025-03-07', 1),
+('Outlet Especial', 'Peças com super desconto', 30.00, '2025-03-10', '2025-03-20', 16),
+('Promo Fitness', 'Itens fitness em oferta', 10.00, '2025-03-03', '2025-03-12', 13);

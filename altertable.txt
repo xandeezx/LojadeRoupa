@@ -1,0 +1,21 @@
+USE LojaRoupas;
+
+ALTER TABLE Loja ADD data_abertura DATE;
+
+ALTER TABLE Categoria MODIFY descricao VARCHAR(300);
+
+ALTER TABLE Cliente ADD genero ENUM('Masculino','Feminino','Outro');
+
+ALTER TABLE Cliente ADD CONSTRAINT unique_email_cliente UNIQUE (email);
+
+ALTER TABLE Funcionario ADD salario DECIMAL(10,2);
+
+ALTER TABLE Funcionario CHANGE contato telefone VARCHAR(100);
+
+ALTER TABLE Venda ADD observacoes VARCHAR(255);
+
+ALTER TABLE Venda MODIFY status ENUM('Finalizada','Pendente','Cancelada');
+
+ALTER TABLE Produto ADD estoque_minimo INT DEFAULT 5;
+
+ALTER TABLE Produto ADD INDEX idx_nome_produto (nome);

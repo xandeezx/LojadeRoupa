@@ -1,0 +1,201 @@
+USE lojaRoupas;
+USE LojaRoupas;
+
+
+
+
+SELECT * FROM Produto;
+
+
+SELECT nome "Produto", preco "Preço (R$)", quantidade_estoque "Estoque"
+	FROM Produto
+		ORDER BY nome;
+
+
+SELECT p.nome "Produto", c.nome "Categoria", p.preco "Preço (R$)"
+	FROM Produto p
+		INNER JOIN Categoria c ON p.id_categoria = c.id_categoria
+			ORDER BY c.nome, p.nome;
+
+
+SELECT nome "Produto", preco "Preço (R$)"
+	FROM Produto
+		WHERE preco > 100
+			ORDER BY preco DESC;
+
+
+SELECT nome "Promoção", descricao "Descrição", percentual_desconto "Desconto (%)"
+	FROM Promocao
+		WHERE CURDATE() BETWEEN data_inicio AND data_fim
+			ORDER BY percentual_desconto DESC;
+
+
+SELECT c.nome "Cliente", COUNT(v.id_venda) "Total de Compras"
+	FROM Cliente c
+		LEFT JOIN Venda v ON v.id_cliente = c.id_cliente
+			GROUP BY c.nome
+				ORDER BY COUNT(v.id_venda) DESC;
+
+
+SELECT v.id_venda "ID Venda", c.nome "Cliente", f.nome "Funcionário", v.status "Status"
+	FROM Venda v
+		INNER JOIN Cliente c ON c.id_cliente = v.id_cliente
+		INNER JOIN Funcionario f ON f.id_funcionario = v.id_funcionario
+			ORDER BY v.data_venda DESC;
+
+
+SELECT iv.id_item "Item", p.nome "Produto", iv.quantidade "Qtd", 
+	iv.preco_unitario "Preço Unitário", 
+	(iv.quantidade * iv.preco_unitario) "Total (R$)"
+	FROM ItensVenda iv
+		INNER JOIN Produto p ON p.id_produto = iv.id_produto
+			ORDER BY iv.id_item;
+
+
+SELECT p.nome "Produto", SUM(iv.quantidade) "Total Vendido"
+	FROM ItensVenda iv
+		INNER JOIN Produto p ON p.id_produto = iv.id_produto
+			GROUP BY p.nome
+				ORDER BY SUM(iv.quantidade) DESC;
+
+
+SELECT f.nome "Funcionário", COUNT(v.id_venda) "Total de Vendas"
+	FROM Funcionario f
+		LEFT JOIN Venda v ON v.id_funcionario = f.id_funcionario
+			GROUP BY f.nome
+				ORDER BY COUNT(v.id_venda) DESC;
+
+
+SELECT nome "Cliente", email "E-mail"
+	FROM Cliente
+		WHERE id_cliente NOT IN (SELECT DISTINCT id_cliente FROM Venda)
+			ORDER BY nome;
+
+
+SELECT v.id_venda "ID Venda", c.nome "Cliente", 
+	SUM(iv.quantidade * iv.preco_unitario - iv.desconto) "Total (R$)"
+	FROM Venda v
+		INNER JOIN Cliente c ON c.id_cliente = v.id_cliente
+		INNER JOIN ItensVenda iv ON iv.id_venda = v.id_venda
+			GROUP BY v.id_venda, c.nome
+				ORDER BY v.id_venda;
+
+
+SELECT CONCAT('R$ ', FORMAT(SUM(iv.quantidade * iv.preco_unitario - iv.desconto), 2, 'de_DE')) 
+	AS "Faturamento Total"
+	FROM ItensVenda iv;
+
+
+SELECT p.nome "Produto", p.preco "Preço Original", 
+	pr.percentual_desconto "Desconto (%)", 
+	(p.preco - (p.preco * pr.percentual_desconto / 100)) "Preço Promocional"
+	FROM Produto p
+		INNER JOIN Promocao pr ON pr.id_produto = p.id_produto
+			ORDER BY pr.percentual_desconto DESC;
+
+
+SELECT nome "Produto", quantidade_estoque "Estoque Atual", estoque_minimo "Estoque Mínimo"
+	FROM Produto
+		WHERE quantidade_estoque < estoque_minimo;
+
+
+SELECT ROUND(AVG(preco), 2) "Preço Médio dos Produtos (R$)" FROM Produto;
+
+
+SELECT id_venda "Venda", data_venda "Data", forma_pagamento "Pagamento"
+	FROM Venda
+		WHERE status = 'Cancelada'
+			ORDER BY data_venda;
+
+
+SELECT c.nome "Cliente", 
+	CONCAT('R$ ', FORMAT(SUM(iv.quantidade * iv.preco_unitario), 2, 'de_DE')) "Total Gasto"
+	FROM Cliente c
+		INNER JOIN Venda v ON v.id_cliente = c.id_cliente
+		INNER JOIN ItensVenda iv ON iv.id_venda = v.id_venda
+			GROUP BY c.nome
+				ORDER BY SUM(iv.quantidade * iv.preco_unitario) DESC;
+
+
+SELECT nome "Funcionário", salario "Salário (R$)"
+	FROM Funcionario
+		WHERE salario > (SELECT AVG(salario) FROM Funcionario)
+			ORDER BY salario DESC;
+
+
+SELECT c.nome "Categoria", COUNT(p.id_produto) "Qtd Produtos"
+	FROM Categoria c
+		LEFT JOIN Produto p ON c.id_categoria = p.id_categoria
+			GROUP BY c.nome
+				ORDER BY COUNT(p.id_produto) DESC;
+
+
+----view---
+
+
+CREATE VIEW vw_produtos_categoria AS
+SELECT p.nome "Produto", c.nome "Categoria", p.preco "Preço (R$)"
+	FROM Produto p
+		INNER JOIN Categoria c ON p.id_categoria = c.id_categoria;
+
+
+CREATE VIEW vw_vendas_detalhes AS
+SELECT v.id_venda, c.nome "Cliente", f.nome "Funcionário", v.status, v.data_venda
+	FROM Venda v
+		INNER JOIN Cliente c ON v.id_cliente = c.id_cliente
+		INNER JOIN Funcionario f ON v.id_funcionario = f.id_funcionario;
+
+
+CREATE VIEW vw_promocoes_ativas AS
+SELECT p.nome "Produto", p.preco "Preço Original", pr.percentual_desconto "Desconto (%)"
+	FROM Produto p
+		INNER JOIN Promocao pr ON pr.id_produto = p.id_produto
+			WHERE CURDATE() BETWEEN pr.data_inicio AND pr.data_fim;
+
+
+CREATE VIEW vw_clientes_compras AS
+SELECT c.nome "Cliente", COUNT(v.id_venda) "Total Compras"
+	FROM Cliente c
+		LEFT JOIN Venda v ON c.id_cliente = v.id_cliente
+			GROUP BY c.nome;
+
+
+CREATE VIEW vw_funcionarios_vendas AS
+SELECT f.nome "Funcionário", COUNT(v.id_venda) "Total Vendas"
+	FROM Funcionario f
+		LEFT JOIN Venda v ON v.id_funcionario = f.id_funcionario
+			GROUP BY f.nome;
+
+
+CREATE VIEW vw_faturamento_venda AS
+SELECT v.id_venda, SUM(iv.quantidade * iv.preco_unitario - iv.desconto) "Total (R$)"
+	FROM Venda v
+		INNER JOIN ItensVenda iv ON iv.id_venda = v.id_venda
+			GROUP BY v.id_venda;
+
+
+CREATE VIEW vw_estoque_baixo AS
+SELECT nome "Produto", quantidade_estoque "Estoque", estoque_minimo "Mínimo"
+	FROM Produto
+		WHERE quantidade_estoque < estoque_minimo;
+
+
+CREATE VIEW vw_clientes_valor_total AS
+SELECT c.nome "Cliente", SUM(iv.quantidade * iv.preco_unitario) "Valor Gasto"
+	FROM Cliente c
+		INNER JOIN Venda v ON v.id_cliente = c.id_cliente
+		INNER JOIN ItensVenda iv ON iv.id_venda = v.id_venda
+			GROUP BY c.nome;
+
+
+CREATE VIEW vw_produtos_mais_vendidos AS
+SELECT p.nome "Produto", SUM(iv.quantidade) "Total Vendido"
+	FROM Produto p
+		INNER JOIN ItensVenda iv ON iv.id_produto = p.id_produto
+			GROUP BY p.nome;
+
+
+CREATE VIEW vw_funcionarios_salario_alto AS
+SELECT nome "Funcionário", salario "Salário (R$)"
+	FROM Funcionario
+		WHERE salario > (SELECT AVG(salario) FROM Funcionario);
